@@ -1,14 +1,15 @@
-package com.example.level3;
+package com.example.level4;
+
+import com.example.level3.MenuItem;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-//키오스크 프로그램의 메뉴를 관리하고 사용자 입력을 처리하는 클래스
 public class Kiosk {
-    private final List<MenuItem> menuItems;
+    private final List<com.example.level3.MenuItem> menuItems;
 
-    public Kiosk (List<MenuItem> menuItems) {
+    public Kiosk (List<com.example.level3.MenuItem> menuItems) {
         this.menuItems = menuItems;
     }
 
@@ -32,7 +33,7 @@ public class Kiosk {
                 } else if (choose > 4) {
                     System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
                 } else {
-                    MenuItem chooseItem = this.menuItems.get(choose -1);
+                    com.example.level3.MenuItem chooseItem = this.menuItems.get(choose -1);
                     System.out.println("선택한 메뉴: " + chooseItem.getName() + ", " + chooseItem.getPrice() + ", " + chooseItem.getManual());
                 }
             } catch (InputMismatchException e) {
@@ -54,5 +55,4 @@ public class Kiosk {
 
         System.out.println("0. 종료 | 종료");
     }
-
 }
