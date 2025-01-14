@@ -1,25 +1,25 @@
 package com.example.level1;
 
 public class MenuItem {
-    private final String burgerName;
-    private final double price;
+    private final String name;
+    private final Double price;
     private final String manual;
 
     public MenuItem(String burgerName, double price, String manual) {
-        this.burgerName = burgerName;
+        this.name = burgerName;
         this.price = price;
         this.manual = manual;
     }
 
-    public String bergerName () {
-        return burgerName;
+    public String getName () {
+        return name;
     }
 
-    public double price () {
+    public double getPrice () {
         return price;
     }
 
-    public String manual () {
+    public String getManual () {
         return manual;
     }
 }

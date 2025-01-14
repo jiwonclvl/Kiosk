@@ -13,13 +13,14 @@ public class Main {
         MenuItem item3 = new MenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
         MenuItem item4 = new MenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거");
 
+        MenuItem [] items = {item1, item2, item3, item4};
+
         while (true) {
 
                 System.out.println("[ SHAKESHACK MENU ]");
-                System.out.println("1. " + item1.bergerName() + " |W" + item1.price() + "| " + item1.manual());
-                System.out.println("2. " + item2.bergerName() + " |W" + item2.price() + "| " + item2.manual());
-                System.out.println("3. " + item3.bergerName() + " |W" + item3.price() + "| " + item3.manual());
-                System.out.println("4. " + item4.bergerName() + " |W" + item4.price() + "| " + item4.manual());
+                for (int i = 0; i < items.length; i++) {
+                    System.out.println((i + 1) + ". " + items[i].getName() + " |W" + items[i].getPrice() + "| " + items[i].getManual());
+                }
                 System.out.println("0. 종료 | 종료");
 
                 try {
