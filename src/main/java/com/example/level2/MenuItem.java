@@ -1,11 +1,11 @@
 package com.example.level2;
 
-public class MenuItem2 {
+public class MenuItem {
     private final String name;
     private final Double price;
     private final String manual;
 
-    public MenuItem2(String name, double price, String manual) {
+    public MenuItem(String name, double price, String manual) {
         this.name = name;
         this.price = price;
         this.manual = manual;
