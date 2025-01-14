@@ -13,6 +13,7 @@ public class Main2 {
         menuItems.add(new MenuItem2("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
         menuItems.add(new MenuItem2("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거"));
 
+
         Scanner sc = new Scanner(System.in);
 
         while (true) {
