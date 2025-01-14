@@ -5,8 +5,8 @@ public class MenuItem2 {
     private final Double price;
     private final String manual;
 
-    public MenuItem2(String burgerName, double price, String manual) {
-        this.name = burgerName;
+    public MenuItem2(String name, double price, String manual) {
+        this.name = name;
         this.price = price;
         this.manual = manual;
     }
