@@ -20,7 +20,7 @@ public class Kiosk {
         while (true) {
 
             // 메뉴 출력 메서드 호출
-            printMenu();
+            displayMainMenu();
 
             //사용자 입력에 따른 예외처리 부분
             try {
@@ -41,7 +41,7 @@ public class Kiosk {
         }
     }
 
-    private void printMenu () {
+    private void displayMainMenu () {
 
         System.out.println("[ SHAKESHACK MENU ]");
 
