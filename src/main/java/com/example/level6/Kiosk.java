@@ -20,6 +20,12 @@ public class Kiosk {
     public void start () {
         while (true) {
 
+            //만약 장바구니에 무언가가 담겨있다면, [Order Menu] 출력하기
+            //만약 주문을 원한다면 4를 누르고 주문정보를 다시 한번 띄워준 뒤
+            //최종 금액을 출력하고 마지막으로 다시 '주문'을 입력하면 주문이 완료되었다는 메세지와 함께 금액 출력 후 종료
+            //주문을 원하지 않는다면 2를 눌러 메뉴판으로 돌아가기
+            //진행중인 주문을 취소하고 싶은 경우 5 입력
+
             // 메뉴 출력 메서드 호출
             printMenu();
 
@@ -85,6 +91,9 @@ public class Kiosk {
                 if (0 < choose && choose <= menuItems.size()) {
                     MenuItem Item = menuItems.get(choose -1);
                     System.out.println("선택한 메뉴: " + Item.getName() + ", " + Item.getPrice() + ", " + Item.getManual());
+                    //장바구니 추가 여부 문자 출력 후 예를 누를 시 장바구니에 추가하기 (메뉴명, 가격 정보 넘겨주기)
+                    //아니요를 누르면 다시 메뉴 출력
+
                 } else if (choose == 0) {
                     break;
                 } else if (choose > menuItems.size()) {
