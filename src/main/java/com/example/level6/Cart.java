@@ -1,5 +1,7 @@
 package com.example.level6;
 
+import java.util.ArrayList;
+
 public class Cart {
 
     //메뉴명
@@ -10,8 +12,6 @@ public class Cart {
 
     //수량
     int quantity;
-
-
 
     //생성자
     public Cart(String menuName, double price) {

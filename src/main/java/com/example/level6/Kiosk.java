@@ -1,6 +1,7 @@
 package com.example.level6;
 
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class Kiosk {
 
     private int choose;
     private final Scanner sc = new Scanner(System.in);
+    private List<Cart> cart = new ArrayList<>();
 
     public Kiosk (List<Menu> menu) {
         this.menuCategories = menu;
@@ -19,12 +21,6 @@ public class Kiosk {
 
     public void start () {
         while (true) {
-
-            //만약 장바구니에 무언가가 담겨있다면, [Order Menu] 출력하기
-            //만약 주문을 원한다면 4를 누르고 주문정보를 다시 한번 띄워준 뒤
-            //최종 금액을 출력하고 마지막으로 다시 '주문'을 입력하면 주문이 완료되었다는 메세지와 함께 금액 출력 후 종료
-            //주문을 원하지 않는다면 2를 눌러 메뉴판으로 돌아가기
-            //진행중인 주문을 취소하고 싶은 경우 5 입력
 
             // 메뉴 출력 메서드 호출
             displayMainMenu();
@@ -102,19 +98,32 @@ public class Kiosk {
                 System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
             } else {
                 MenuItem item = menuItems.get(choose -1);
-                System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual());
+                System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
+
                 //장바구니 추가 선택
-//                diaplayAddToCart (MenuItem item);
-//                //예를 누를 시 장바구니에 추가하기 (메뉴명, 가격 정보 넘겨주기)
-//                Cart cart = new Cart(item.getName(), item.getPrice());
-                //아니요를 누르면 다시 메뉴 출력
+                displayCart (item);
+
             }
 
         }
 
     }
 
-//    private void diaplayAddToCart (MenuItem name, MenuItem price, MenuItem manual) {
-//        System.out.println("선택한 메뉴: " + Item.getName() + ", " + Item.getPrice() + ", " + Item.getManual());
-//    }
+    private void displayCart(MenuItem item) {
+        displayAddToCart (item);
+
+        if(choose == 1) {
+            cart.add(new Cart(item.getName(), item.getPrice()));
+            System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
+        }
+    }
+
+    private void displayAddToCart(MenuItem item) {
+        System.out.println(item.getName() + "| W " + item.getPrice() + " | " + item.getManual());
+        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+        System.out.println("1. 확인" + "    " + "2. 취소");
+        choose = Exception ();
+
+        if (choose == -1) { return; }
+    }
 }
