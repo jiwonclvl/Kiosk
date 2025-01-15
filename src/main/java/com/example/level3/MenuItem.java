@@ -1,8 +1,13 @@
 package com.example.level3;
 
 public class MenuItem {
+    //메뉴 이름
     private final String name;
+
+    //메뉴 가격
     private final Double price;
+
+    //메뉴 설명
     private final String manual;
 
     public MenuItem(String name, double price, String manual) {

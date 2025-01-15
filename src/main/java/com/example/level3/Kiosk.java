@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Kiosk {
     private final List<MenuItem> menuItems;
 
+
     public Kiosk (List<MenuItem> menuItems) {
         this.menuItems = menuItems;
     }
@@ -21,9 +22,7 @@ public class Kiosk {
             // 메뉴 출력 메서드 호출
             printMenu();
 
-            //입력 받은 숫자가 0 -> 프로그램 종료
-            //입력 받은 숫자가 메뉴에 있는 경우 -> 선택한 메뉴 정보 출력
-            //입력 받은 값이 숫자가 아닌경우, 입력 받은 숫자가 메뉴에 없는 경우 -> 다시 입력
+            //사용자 입력에 따른 예외처리 부분
             try {
                 int choose = sc.nextInt();
                 if (choose == 0) {
@@ -46,7 +45,7 @@ public class Kiosk {
 
         System.out.println("[ SHAKESHACK MENU ]");
 
-        //반복문을 활용해 메뉴를 하나씩 출력한다.
+        //버거 종류 출력
         for (int i = 0; i < this.menuItems.size(); i++) {
             MenuItem item = this.menuItems.get(i);
             System.out.println((i + 1) + ". " + item.getName() + " |W" + item.getPrice() + "| " + item.getManual());
@@ -54,5 +53,4 @@ public class Kiosk {
 
         System.out.println("0. 종료 | 종료");
     }
-
 }
