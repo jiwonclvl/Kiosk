@@ -7,10 +7,10 @@ public class Menu {
     private String category;
 
     //카테고리 별 메뉴 항목들을 담고 있는 배열
-    private List<com.example.level5.MenuItem> menuItems;
+    private List<MenuItem> menuItems;
 
-    public Menu (String _categoryName, List<com.example.level5.MenuItem> _menuItems ) {
-        this.category = _categoryName;
+    public Menu (String category, List<MenuItem> _menuItems ) {
+        this.category = category;
         this.menuItems = _menuItems;
     }
 
@@ -18,9 +18,7 @@ public class Menu {
         return category;
     }
 
-    public List<MenuItem> getMenuItems() {
-        return menuItems;
-    }
+    public List<MenuItem> getMenuItems() { return menuItems; }
 
 
 }
