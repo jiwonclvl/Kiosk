@@ -1,16 +1,15 @@
 package com.example.level4;
 
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
 
-    private  List<Menu> menu = new ArrayList<>();
+    private final List<Menu> menu;
     private int choose;
-    private Scanner sc = new Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
     //제거하기
     // 나증에 getter로 값 받아오기
     public Kiosk (List<Menu> menu) {
@@ -28,23 +27,24 @@ public class Kiosk {
             try {
                 choose = sc.nextInt();
 
+                // 메인에서의 입력 예외 처리 (메서드로 만들 예정)
+                if (choose == 0) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                } else if (choose > this.menu.size()) {
+                    System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
+                } else {
+                    Menu chooseMenu = this.menu.get(choose -1);
+                    System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategoryName() + "\n");
+                    //입력된 카테고리의 서브 메뉴 출력
+                    printSubMenu(chooseMenu);
+                }
+
             } catch (InputMismatchException e) {
                 System.out.println("메뉴가 올바르지 않습니다. 다시 입력해주세요!\n");
                 sc.next();
             }
 
-            // 메인에서의 입력 예외 처리 (메서드로 만들 예정)
-            if (choose == 0) {
-                System.out.println("프로그램을 종료합니다.");
-                break;
-            } else if (choose > this.menu.size()) {
-                System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
-            } else {
-                Menu chooseMenu = this.menu.get(choose -1);
-                System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategoryName() + "\n");
-                //입력된 카테고리의 서브 메뉴 출력
-                printSubMenu(chooseMenu);
-            }
 
         }
     }
@@ -81,20 +81,21 @@ public class Kiosk {
             try {
                 choose = sc.nextInt();
 
+                // subMenu에서의 입력 예외 처리 (메서드로 만들 예정)
+                if (0 < choose && choose <= menuItems.size()) {
+                    MenuItem Item = menuItems.get(choose -1);
+                    System.out.println("선택한 메뉴: " + Item.getName() + ", " + Item.getPrice() + ", " + Item.getManual());
+                } else if (choose == 0) {
+                    break;
+                } else if (choose > menuItems.size()) {
+                    System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
+                }
+
             } catch (InputMismatchException e) {
                 System.out.println("메뉴가 올바르지 않습니다. 다시 입력해주세요!\n");
                 sc.next();
             }
 
-            // subMenu에서의 입력 예외 처리 (메서드로 만들 예정)
-            if (choose == 0) {
-                break;
-            } else if (choose > menuItems.size()) {
-                System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
-            } else {
-                MenuItem Item = menuItems.get(choose -1);
-                System.out.println("선택한 메뉴: " + Item.getName() + ", " + Item.getPrice() + ", " + Item.getManual());
-            }
         }
 
     }
