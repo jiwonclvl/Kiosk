@@ -5,11 +5,19 @@ public class Cart {
     //메뉴명
     String menuName;
 
+    // 가격
+    double price;
+
     //수량
     int quantity;
 
-    // 가격
-    double price;
+
+
+    //생성자
+    public Cart(String menuName, double price) {
+        this.menuName = menuName;
+        this.price = price;
+    }
 
     // 장바구니 출력 및 금액 계산
 
