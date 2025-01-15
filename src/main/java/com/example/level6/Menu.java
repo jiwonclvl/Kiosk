@@ -3,18 +3,19 @@ package com.example.level6;
 import java.util.List;
 
 public class Menu {
-    //필드 (카테고리 만들기[배열로])
-    private String categoryName;
-    private List<MenuItem> menuItems;
+    //메뉴 카테고리 이름
+    private String category;
 
-    public Menu (String _categoryName, List<MenuItem> _menuItems ) {
-        this.categoryName = _categoryName;
+    //카테고리 별 메뉴 항목들을 담고 있는 배열
+    private List<com.example.level5.MenuItem> menuItems;
+
+    public Menu (String _categoryName, List<com.example.level5.MenuItem> _menuItems ) {
+        this.category = _categoryName;
         this.menuItems = _menuItems;
     }
 
-    //메서드 (menuItem getter)
-    public String getCategoryName() {
-        return categoryName;
+    public String getCategory() {
+        return category;
     }
 
     public List<MenuItem> getMenuItems() {
