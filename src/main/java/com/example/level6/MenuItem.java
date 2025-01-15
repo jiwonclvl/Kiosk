@@ -27,4 +27,5 @@ public class MenuItem {
     public String getManual () {
         return manual;
     }
+
 }
