@@ -1,4 +1,4 @@
-package com.example.level2;
+package com.example.level1;
 
 public class MenuItem {
     private final String name;

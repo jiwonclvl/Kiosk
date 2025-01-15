@@ -15,9 +15,7 @@ public class MenuItem {
         return name;
     }
 
-    public double getPrice () {
-        return price;
-    }
+    public double getPrice () {return price;}
 
     public String getManual () {
         return manual;
