@@ -13,11 +13,11 @@ public class Kiosk {
 
     private int choose;
     private final Scanner sc = new Scanner(System.in);
-    private final List<Cart> cart = new ArrayList<>();
 
     //예외처리 클래스
     private InputException exception = new InputException();
 
+    //생성자
     public Kiosk (List<Menu> menu) {
         this.menuCategories = menu;
     }
@@ -92,29 +92,13 @@ public class Kiosk {
                     MenuItem item = menuItems.get(choose - 1);
                     System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
 
+                    Cart cart = new Cart(choose, item, menuCategories);
                     //입력된 카테고리의 서브 메뉴 출력
-                    displayCart(item);
+                    cart.displayCart();
                     break;
             }
         }
 
     }
 
-    private void displayCart(MenuItem item) {
-        displayAddToCart (item);
-
-        if(choose == 1) {
-            cart.add(new Cart(item.getName(), item.getPrice()));
-            System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
-        }
-    }
-
-    private void displayAddToCart(MenuItem item) {
-        System.out.println(item.getName() + "| W " + item.getPrice() + " | " + item.getManual());
-        System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
-        System.out.println("1. 확인" + "    " + "2. 취소");
-        choose = exception.inputException(menuCategories.size());
-
-        if (choose == -1) { return; }
-    }
 }
