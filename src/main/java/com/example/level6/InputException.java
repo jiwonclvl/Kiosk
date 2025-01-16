@@ -14,7 +14,7 @@ public class InputException {
             return this.input;
 
         } catch (InputMismatchException e) {
-            System.out.println("입력한 값이 화면에 표시된 항목에 해당하지 않습니다. 다시 입력해주세요!\n");
+            System.out.println("숫자를 입력해주세요.\n");
             sc.next();
             return -1;
         } catch (IllegalArgumentException e) {

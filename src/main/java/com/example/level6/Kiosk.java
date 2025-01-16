@@ -18,7 +18,8 @@ public class Kiosk {
 
     //예외처리 클래스
     private final InputException exception = new InputException();
-    private final List<List<MenuItem>> orderCart = new ArrayList<>();
+    private final List<MenuItem> orderCart = new ArrayList<>();
+
     private Scanner sc = new Scanner(System.in);
 
     //생성자
@@ -32,9 +33,11 @@ public class Kiosk {
             // 메뉴 출력 메서드 호출
             displayMainMenu();
 
-            if (!this.orderCart.isEmpty()) {
+            if (this.orderCart.size() != 0) {
                 displayOrder();
-                choose = exception.inputException(menuCategories.size() + 2);
+
+                int size = menuCategories.size() + 2;
+                choose = exception.inputException(menuCategories.size() + size);
                 switch (choose) {
                     case 4:
                         //장바구니 확인하기
@@ -51,15 +54,18 @@ public class Kiosk {
                         }
                     case 5:
                         //주문 취소하기
+                        System.out.printf("5");
                         this.orderCart.clear();
+                        break;
                     default:
+                        System.out.println("default");
                         break;
                 }
             }
 
-
             //문자 입력시 예외처리
             choose = exception.inputException(menuCategories.size());
+
 
             //입력에 따른 예외 처리 부분
             switch (choose) {
@@ -122,14 +128,15 @@ public class Kiosk {
                 default:
                     MenuItem item = menuItems.get(choose - 1);
                     System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
-
                     //장바구니에 아이템 담기
                     displayAddToCart(item);
-                    if( choose == 1) {
-                        orderCart.add(cart.getCart());
-                    }
+
                     break;
             }
+            if(choose == 1) {
+                orderCart.add(cart.getCart());
+            }
+            break;
         }
     }
 
@@ -158,12 +165,11 @@ public class Kiosk {
     }
 
     //장바구니 내 목록 출력
-    private void displayCartList(List<List<MenuItem>> orderCart) {
+    private void displayCartList(List<MenuItem> orderCart) {
         System.out.println("\n[ Orders ]");
         for (int i = 0; i < orderCart.size(); i++) {
-            List<MenuItem> cartItem = orderCart.get(i);
-            MenuItem item = cartItem.get(i);
-            System.out.println(item.getName() + " | W" + item.getPrice() + " | " + item.getManual());
+            MenuItem cartItem = orderCart.get(i);
+            System.out.println(cartItem.getName() + " | W" + cartItem.getPrice() + " | " + cartItem.getManual());
         }
 
         displayTotalPrice();

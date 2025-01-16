@@ -6,19 +6,19 @@ import java.util.List;
 public class Cart {
 
     //장바구니 배열
-    private final List<MenuItem> cart = new ArrayList<>();
+    private MenuItem cart;
 
     //총 금액
     private double price;
 
     //장바구니 담기 및 담은 메뉴의 가격 계산
     public void addItemToCart(MenuItem item) {
-        this.cart.add(item);
+        this.cart = new MenuItem (item.getName(), item.getPrice(), item.getManual());
         this.price += item.getPrice();
     }
 
     //장바구니 배열 반환 getter
-    public List<MenuItem> getCart() {
+    public MenuItem getCart() {
         return this.cart;
     }
 
