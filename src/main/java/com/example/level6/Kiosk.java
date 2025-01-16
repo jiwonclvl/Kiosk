@@ -2,9 +2,8 @@ package com.example.level6;
 
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Kiosk {
 
@@ -12,10 +11,12 @@ public class Kiosk {
     private final List<Menu> menuCategories;
 
     private int choose;
-    private final Scanner sc = new Scanner(System.in);
 
     //예외처리 클래스
-    private InputException exception = new InputException();
+    private final InputException exception = new InputException();
+
+    //장바구니 배열
+    private List<MenuItem> orderCart = new ArrayList<>();
 
     //생성자
     public Kiosk (List<Menu> menu) {
@@ -27,6 +28,11 @@ public class Kiosk {
 
             // 메뉴 출력 메서드 호출
             displayMainMenu();
+
+            //주문 메뉴 출력
+            if (!orderCart.isEmpty()) {
+                displayOrder();
+            }
 
             //문자 입력시 예외처리
             choose = exception.inputException(menuCategories.size());
@@ -64,6 +70,7 @@ public class Kiosk {
         System.out.println("0. 종료 | 종료");
     }
 
+    //카테고리 내 하위 메뉴 출력
     private void displayCategoryMenu (Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
 
@@ -95,10 +102,18 @@ public class Kiosk {
                     Cart cart = new Cart(choose, item, menuCategories);
                     //입력된 카테고리의 서브 메뉴 출력
                     cart.displayCart();
+                    orderCart = cart.getCart();
                     break;
             }
         }
 
+    }
+
+    //장바구니 메뉴 출력
+    private void displayOrder () {
+        System.out.println("\n[ ORDER MENU ]");
+        System.out.println("4. Orders      | 장바구니를 확인 후 주문합니다.");
+        System.out.println("5. Cancel      | 장바구니를 확인 후 주문합니다.");
     }
 
 }

@@ -7,25 +7,25 @@ public class InputException {
     private int input;
     private Scanner sc = new Scanner(System.in);
 
-    public int inputException(int size) {
+    public int inputException(int menuCategoriesSize) {
         try {
             this.input = sc.nextInt();
-            validateInput(input, size);
+            validateInput(input, menuCategoriesSize);
             return this.input;
 
         } catch (InputMismatchException e) {
             System.out.println("입력한 값이 화면에 표시된 항목에 해당하지 않습니다. 다시 입력해주세요!\n");
             sc.next();
             return -1;
-        } catch (IllegalStateException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return -2;
         }
     }
 
-    private void validateInput(int input, int size) {
-        if (input > size) {
-            throw new IllegalStateException("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
+    private void validateInput(int input, int menuCategoriesSize) {
+        if (input > menuCategoriesSize) {
+            throw new IllegalArgumentException("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
         }
     }
 }

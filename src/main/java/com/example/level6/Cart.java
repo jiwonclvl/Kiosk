@@ -21,6 +21,8 @@ public class Cart {
     //장바구니 배열
     private List<MenuItem> cart = new ArrayList<>();
 
+    //
+
     //생성자
     public Cart(int input, MenuItem item , List<Menu> menuCategories ) {
         this.input = input;
@@ -35,7 +37,7 @@ public class Cart {
         if(input == 1) {
             cart.add(item);
             System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
-            System.out.println(cart);
+            return;
         }
     }
 
@@ -48,10 +50,11 @@ public class Cart {
         if (input == -1) { return; }
     }
 
+    public List<MenuItem> getCart() {
+        return cart;
+    }
 
     // 장바구니 출력 및 금액 계산
-
-    //장바구니에 담기
 
     //주문 기능시 장바구니 배열 초기화
 
