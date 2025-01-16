@@ -25,7 +25,7 @@ public class InputException {
 
     private void validateInput(int input, int menuCategoriesSize) {
         if (input > menuCategoriesSize) {
-            throw new IllegalArgumentException("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
+            throw new IllegalArgumentException("입력한 값이 화면에 표시된 항목에 해당하지 않습니다. 다시 선택해주세요.\n");
         }
     }
 }
