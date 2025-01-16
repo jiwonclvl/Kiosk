@@ -15,6 +15,9 @@ public class Kiosk {
     private final Scanner sc = new Scanner(System.in);
     private final List<Cart> cart = new ArrayList<>();
 
+    //예외처리 클래스
+    private InputException exception = new InputException();
+
     public Kiosk (List<Menu> menu) {
         this.menuCategories = menu;
     }
@@ -26,7 +29,7 @@ public class Kiosk {
             displayMainMenu();
 
             //문자 입력시 예외처리
-            choose = inputException();
+            choose = exception.inputException(menuCategories.size());
 
             //입력에 따른 예외 처리 부분
             switch (choose) {
@@ -61,30 +64,6 @@ public class Kiosk {
         System.out.println("0. 종료 | 종료");
     }
 
-    private int inputException () {
-        try {
-            choose = sc.nextInt();
-            validateInput(choose);
-            return choose;
-
-        } catch (InputMismatchException e) {
-            System.out.println("입력된 수는 메뉴에 해당하지 않습니다. 다시 입력해주세요!\n");
-            sc.next();
-            return -1;
-        } catch (IllegalStateException e) {
-            System.out.println(e.getMessage());
-            return -2;
-        }
-
-    }
-
-    private void validateInput (int choose) {
-
-        if (choose > menuCategories.size()) {
-            throw new IllegalStateException("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
-        }
-    }
-
     private void displayCategoryMenu (Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
 
@@ -99,7 +78,7 @@ public class Kiosk {
             System.out.println("0. 뒤로가기 | 뒤로가기");
 
             //문자 입력시 예외처리
-            choose = inputException();
+            choose = exception.inputException(menuCategories.size());
 
             //입력에 따른 예외 처리 부분
             switch (choose) {
@@ -108,7 +87,6 @@ public class Kiosk {
                 case -1:
                     continue;
                 case 0:
-                    System.out.println("메인 메뉴로 돌아가겠습니다.");
                     return;
                 default:
                     MenuItem item = menuItems.get(choose - 1);
@@ -135,7 +113,7 @@ public class Kiosk {
         System.out.println(item.getName() + "| W " + item.getPrice() + " | " + item.getManual());
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인" + "    " + "2. 취소");
-        choose = inputException ();
+        choose = exception.inputException(menuCategories.size());
 
         if (choose == -1) { return; }
     }
