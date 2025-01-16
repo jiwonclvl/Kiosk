@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Cart {
 
-    //메뉴명, 가격을 포함하는 MenuItem
+    //메뉴명, 가격, 설명을 포함하는 MenuItem
     private MenuItem item;
 
     //메뉴 카테고리를 담고있는 Menu 배열
@@ -21,6 +21,8 @@ public class Cart {
     //장바구니 배열
     private List<MenuItem> cart = new ArrayList<>();
 
+    //총 금액
+    private double price;
     //
 
     //생성자
@@ -34,10 +36,11 @@ public class Cart {
     public void displayCart() {
         displayAddToCart ();
 
-        if(input == 1) {
-            cart.add(item);
+        if(this.input == 1) {
+            this.cart.add(item);
+            //장바구니 금액
+            this.price += item.getPrice();
             System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
-            return;
         }
     }
 
@@ -45,17 +48,18 @@ public class Cart {
         System.out.println(item.getName() + "| W " + item.getPrice() + " | " + item.getManual());
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인" + "    " + "2. 취소");
-        input = exception.inputException(menuCategories.size());
+        this.input = exception.inputException(menuCategories.size());
 
-        if (input == -1) { return; }
+        if (this.input == -1) { return; }
     }
 
-    public List<MenuItem> getCart() {
-        return cart;
+    public MenuItem getItem() {
+        return this.item;
     }
 
-    // 장바구니 출력 및 금액 계산
-
-    //주문 기능시 장바구니 배열 초기화
+    //총 금액 getter
+    public double getTotalPrice() {
+        return this.price;
+    }
 
 }

@@ -14,9 +14,10 @@ public class Kiosk {
 
     //예외처리 클래스
     private final InputException exception = new InputException();
+    private List<Cart> orderCart = new ArrayList<>();
 
-    //장바구니 배열
-    private List<MenuItem> orderCart = new ArrayList<>();
+    //총 금액
+    private double totalPrice;
 
     //생성자
     public Kiosk (List<Menu> menu) {
@@ -29,9 +30,30 @@ public class Kiosk {
             // 메뉴 출력 메서드 호출
             displayMainMenu();
 
-            //주문 메뉴 출력
-            if (!orderCart.isEmpty()) {
+            if (!this.orderCart.isEmpty()) {
                 displayOrder();
+
+                choose = exception.inputException(menuCategories.size() +2);
+                switch (choose) {
+                    case 4:
+                        //장바구니 확인하기
+                        displayCart (orderCart);
+
+                        //최종 주문 선택
+                        displayFinal();
+                        choose = exception.inputException(2);
+                        if(choose == 1) {
+                            //주문 완료
+                            displayCompleteOrder();
+                            return;
+                        }
+                        else {
+                            continue;
+                        }
+                    case 5:
+                        //주문 취소하기
+                        this.orderCart.clear();
+                }
             }
 
             //문자 입력시 예외처리
@@ -85,7 +107,7 @@ public class Kiosk {
             System.out.println("0. 뒤로가기 | 뒤로가기");
 
             //문자 입력시 예외처리
-            choose = exception.inputException(menuCategories.size());
+            choose = exception.inputException(menuItems.size());
 
             //입력에 따른 예외 처리 부분
             switch (choose) {
@@ -102,7 +124,7 @@ public class Kiosk {
                     Cart cart = new Cart(choose, item, menuCategories);
                     //입력된 카테고리의 서브 메뉴 출력
                     cart.displayCart();
-                    orderCart = cart.getCart();
+                    orderCart.add(cart);
                     break;
             }
         }
@@ -113,7 +135,41 @@ public class Kiosk {
     private void displayOrder () {
         System.out.println("\n[ ORDER MENU ]");
         System.out.println("4. Orders      | 장바구니를 확인 후 주문합니다.");
-        System.out.println("5. Cancel      | 장바구니를 확인 후 주문합니다.");
+        System.out.println("5. Cancel      | 진행중인 주문을 취소합니다.");
     }
+
+    //장바구니 내 목록 출력
+    private void displayCart (List<Cart> orderCart) {
+        System.out.println("\n[ Orders ]");
+        for (int i = 0; i < orderCart.size(); i++) {
+            Cart cart = orderCart.get(i);
+            MenuItem item = cart.getItem();
+            System.out.println(item.getName() + " | W" + item.getPrice() + " | " + item.getManual());
+        }
+
+        displayTotalPrice (orderCart);
+
+    }
+
+    //총 가격
+    private void displayTotalPrice (List<Cart> orderCart) {
+        System.out.println("\n[ Total ]");
+
+        //총 금액 가져오기
+        for (Cart cart : orderCart) {
+            totalPrice += cart.getTotalPrice();
+        }
+        System.out.println(totalPrice);
+
+    }
+
+    private void displayFinal () {
+        System.out.println("1. 주문       2. 메뉴판");
+    }
+
+    private void displayCompleteOrder () {
+        System.out.println("주문이 완료되었습니다. 금액은 W " + this.totalPrice + " 입니다.");
+    }
+
 
 }
