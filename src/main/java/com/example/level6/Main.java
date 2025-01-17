@@ -1,6 +1,4 @@
-package com.example.level6.model;
-import com.example.level6.Kiosk;
-
+package com.example.level6;
 import java.util.ArrayList;
 import java.util.List;
 

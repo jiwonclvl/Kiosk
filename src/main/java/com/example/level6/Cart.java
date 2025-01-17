@@ -6,7 +6,7 @@ import java.util.List;
 public class Cart {
 
     //장바구니 배열
-    private List<MenuItem > shoppingCart = new ArrayList<>();
+    private List<MenuItem> shoppingCart = new ArrayList<>();
 
     //총 금액
     private double price = 0;
