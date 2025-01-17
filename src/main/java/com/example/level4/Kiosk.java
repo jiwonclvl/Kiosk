@@ -96,12 +96,7 @@ public class Kiosk {
             try {
                 int choose = sc.nextInt();
 
-                //종로 | 뒤로가기
-                if (choose == 0) {
-                    return choose;
-
-                // 메뉴에 없는 item을 선택한 경우
-                } else if (choose > size) {
+                if (choose > size) {
                     System.out.println("입력한 수는 항목에 해당하지 않습니다. 다시 선택해주세요.\n");
                     return -1;
 
