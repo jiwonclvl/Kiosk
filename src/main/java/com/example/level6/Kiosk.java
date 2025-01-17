@@ -3,7 +3,6 @@ package com.example.level6;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 
 public class Kiosk {
@@ -18,9 +17,6 @@ public class Kiosk {
 
     //예외처리 클래스
     private final InputException exception = new InputException();
-    private final List<MenuItem> orderCart = new ArrayList<>();
-
-    private Scanner sc = new Scanner(System.in);
 
     //생성자
     public Kiosk(List<Menu> menu) {
@@ -33,7 +29,9 @@ public class Kiosk {
             // 메뉴 출력 메서드 호출
             displayMainMenu();
 
-            if (this.orderCart.size() != 0) {
+
+            //Cart에서 배열 가져오고 비었는지 확인하기
+            if (!this.cart.getCart().isEmpty()) {
                 displayOrder();
 
                 int size = menuCategories.size() + 2;
@@ -41,7 +39,7 @@ public class Kiosk {
                 switch (choose) {
                     case 4:
                         //장바구니 확인하기
-                        displayCartList(orderCart);
+                        displayCartList(cart.getCart());
 
                         //최종 주문 선택
                         choose = displayFinal();
@@ -54,11 +52,10 @@ public class Kiosk {
                         }
                     case 5:
                         //주문 취소하기
-                        System.out.printf("5");
-                        this.orderCart.clear();
-                        break;
+                        this.cart.getCart().clear();
+                        this.cart.setPrice();
+                        continue;
                     default:
-                        System.out.println("default");
                         break;
                 }
             }
@@ -130,13 +127,8 @@ public class Kiosk {
                     System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
                     //장바구니에 아이템 담기
                     displayAddToCart(item);
-
                     break;
             }
-            if(choose == 1) {
-                orderCart.add(cart.getCart());
-            }
-            break;
         }
     }
 
@@ -150,6 +142,7 @@ public class Kiosk {
         //확인을 누르면 카트에 해당 아이템 추가하기
         if (this.choose == 1) {
             cart.addItemToCart(item);
+            cart.totalAmount(item.getPrice());
             System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
         }
         else {

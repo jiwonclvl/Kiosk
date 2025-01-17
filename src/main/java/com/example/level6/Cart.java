@@ -6,25 +6,37 @@ import java.util.List;
 public class Cart {
 
     //장바구니 배열
-    private MenuItem cart;
+    private List<MenuItem > shoppingCart = new ArrayList<>();
 
     //총 금액
-    private double price;
+    private double price = 0;
 
-    //장바구니 담기 및 담은 메뉴의 가격 계산
+    //장바구니에 담을 아이템
     public void addItemToCart(MenuItem item) {
-        this.cart = new MenuItem (item.getName(), item.getPrice(), item.getManual());
-        this.price += item.getPrice();
+        this.shoppingCart.add(item);
     }
 
-    //장바구니 배열 반환 getter
-    public MenuItem getCart() {
-        return this.cart;
+    //금액 계산
+    public void totalAmount(double price) {
+        this.price += price;
     }
 
-    //총 금액 getter
+    //금액 반환
     public double getTotalPrice() {
-        return this.price;
+         return this.price;
     }
+
+    //금액 초기화
+    //금액 반환
+    public void setPrice() {
+        this.price= 0;
+    }
+
+
+    //장바구니 배열 반환
+    public List<MenuItem > getCart() {
+        return this.shoppingCart;
+    }
+
 
 }
