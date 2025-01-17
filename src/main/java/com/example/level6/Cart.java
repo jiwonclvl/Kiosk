@@ -27,15 +27,19 @@ public class Cart {
     }
 
     //금액 초기화
-    //금액 반환
     public void setPrice() {
         this.price= 0;
     }
 
-
     //장바구니 배열 반환
-    public List<MenuItem > getCart() {
+    public List<MenuItem > getshoppingCart() {
         return this.shoppingCart;
+    }
+
+    //카트 비우기
+    public void clearCart () {
+        this.shoppingCart.clear();
+        this.price = 0;
     }
 
 

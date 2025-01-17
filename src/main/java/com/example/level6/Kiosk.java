@@ -1,7 +1,5 @@
 package com.example.level6;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,7 +29,7 @@ public class Kiosk {
 
 
             //Cart에서 배열 가져오고 비었는지 확인하기
-            if (!this.cart.getCart().isEmpty()) {
+            if (!this.cart.getshoppingCart().isEmpty()) {
                 displayOrder();
 
                 int size = menuCategories.size() + 2;
@@ -39,7 +37,7 @@ public class Kiosk {
                 switch (choose) {
                     case 4:
                         //장바구니 확인하기
-                        displayCartList(cart.getCart());
+                        displayCartList(cart.getshoppingCart());
 
                         //최종 주문 선택
                         choose = displayFinal();
@@ -52,8 +50,7 @@ public class Kiosk {
                         }
                     case 5:
                         //주문 취소하기
-                        this.cart.getCart().clear();
-                        this.cart.setPrice();
+                        cart.clearCart();
                         continue;
                     default:
                         break;
@@ -185,7 +182,7 @@ public class Kiosk {
     }
 
     private void displayCompleteOrder() {
-        System.out.println("주문이 완료되었습니다. 금액은 W " + cart.getTotalPrice() + " 입니다.");
+        System.out.printf("주문이 완료되었습니다. 금액은 W %.1f 입니다.", cart.getTotalPrice());
     }
 
 
