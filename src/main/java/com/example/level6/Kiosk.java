@@ -1,104 +1,32 @@
 package com.example.level6;
-
-
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Kiosk {
 
     //카테고리별 이름과 해당 메뉴 항목들을 가지는 배열
-    private final List<Menu> menuCategories;
-
-    private int choose;
-    private final Scanner sc = new Scanner(System.in);
-
-    //예외처리 클래스
-    private InputException exception = new InputException();
+    private final KioskController kioskController;
 
     //생성자
-    public Kiosk (List<Menu> menu) {
-        this.menuCategories = menu;
+    public Kiosk(KioskController kioskController ) {
+        this.kioskController = kioskController;
     }
 
-    public void start () {
+    public void start() {
         while (true) {
 
-            // 메뉴 출력 메서드 호출
-            displayMainMenu();
+            //메뉴 출력 및 선택
+            int size = kioskController.displayMenu();
 
-            //문자 입력시 예외처리
-            choose = exception.inputException(menuCategories.size());
+            //사용자 입력
+            int input = kioskController.chooseMainMenu(size);
 
-            //입력에 따른 예외 처리 부분
-            switch (choose) {
-                case -2:
-                    continue;
-                case -1:
-                    continue;
-                case 0:
-                    System.out.println("프로그램을 종료합니다.");
-                    return;
-                default:
-                    Menu chooseMenu = this.menuCategories.get(choose - 1);
-                    System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategory() + "\n");
+            //입력에 따른 예외 처리
+            kioskController.handleInput(input);
 
-                    //입력된 카테고리의 서브 메뉴 출력
-                    displayCategoryMenu(chooseMenu);
-                    break;
-            }
+            //프로그램 종료
+            if(input == 0) {return;}
+
         }
     }
-
-    private void displayMainMenu () {
-
-        //3가지 카테고리 출력
-        System.out.println("[ Main MENU ]");
-
-        for (int i = 0; i < this.menuCategories.size(); i++) {
-            Menu category = this.menuCategories.get(i);
-            System.out.println((i + 1) + ". " + category.getCategory());
-        }
-
-        System.out.println("0. 종료 | 종료");
-    }
-
-    private void displayCategoryMenu (Menu choosemenu) {
-        List<MenuItem> menuItems = choosemenu.getMenuItems();
-
-        while (true) {
-            System.out.println("[ " + choosemenu.getCategory() + " MENU ]");
-
-            //입력된 카테고리의 항목들 출력
-            for (int i = 0; i < menuItems.size(); i++) {
-                MenuItem Items = menuItems.get(i);
-                System.out.println((i + 1) + ". " + Items.getName() + " |W" + Items.getPrice() + "| " + Items.getManual());
-            }
-            System.out.println("0. 뒤로가기 | 뒤로가기");
-
-            //문자 입력시 예외처리
-            choose = exception.inputException(menuCategories.size());
-
-            //입력에 따른 예외 처리 부분
-            switch (choose) {
-                case -2:
-                    continue;
-                case -1:
-                    continue;
-                case 0:
-                    return;
-                default:
-                    MenuItem item = menuItems.get(choose - 1);
-                    System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
-
-                    Cart cart = new Cart(choose, item, menuCategories);
-                    //입력된 카테고리의 서브 메뉴 출력
-                    cart.displayCart();
-                    break;
-            }
-        }
-
-    }
-
 }

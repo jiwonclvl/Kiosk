@@ -10,43 +10,42 @@ public class Kiosk {
     //카테고리별 이름과 해당 메뉴 항목들을 가지는 배열
     private final List<Menu> menuCategories;
 
-    private int choose;
+    //입력
     private final Scanner sc = new Scanner(System.in);
 
+    //생성자
     public Kiosk (List<Menu> menu) {
         this.menuCategories = menu;
     }
 
+    //키오스크 시작
     public void start () {
         while (true) {
 
-            // 메뉴 출력 메서드 호출
+            // 메인 메뉴 출력
             displayMainMenu();
 
-            //사용자 입력에 따른 예외처리
-            try {
-                choose = sc.nextInt();
+            //사용자 입력
+            int choose = inputException (menuCategories.size());
 
-                if (choose == 0) {
-                    System.out.println("프로그램을 종료합니다.");
-                    break;
-                } else if (choose > this.menuCategories.size()) {
-                    System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
-                } else {
-                    Menu chooseCategory = this.menuCategories.get(choose -1);
-                    System.out.println("선택한 메인 메뉴: " + chooseCategory.getCategory() + "\n");
+            //입력에 따른 예외처리 (Main Menu)
+            if (choose == 0) {
+                System.out.println("프로그램을 종료합니다.");
+                return;
+            }
+            if (0 < choose && choose <= menuCategories.size()) {
+                //선택한 메인 메뉴
+                Menu chooseCategory = this.menuCategories.get(choose -1);
+                System.out.println("선택한 메뉴: " + chooseCategory.getCategory() + "\n");
 
-                    //입력된 카테고리의 메뉴 항목들 출력
-                    displayCategoryMenu(chooseCategory);
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("메뉴가 올바르지 않습니다. 다시 입력해주세요!\n");
-                sc.next();
+                //입력된 메인 메뉴의 하위 메뉴 항목들 출력
+                subMenu(chooseCategory);
             }
         }
     }
 
-    private void displayMainMenu () {
+    //메인 메뉴
+    public void displayMainMenu () {
 
         //3가지 카테고리 출력
         System.out.println("[ Main MENU ]");
@@ -58,33 +57,54 @@ public class Kiosk {
         System.out.println("0. 종료 | 종료");
     }
 
-    private void displayCategoryMenu (Menu choosemenu) {
-        List<MenuItem> menuItems = choosemenu.getMenuItems();
+    //하위 메뉴
+    public void displaySubMenu (List<MenuItem> menuItems,Menu chooseCategory ) {
+
+        System.out.println("[ " + chooseCategory.getCategory() + " MENU ]");
+        for (int i = 0; i < menuItems.size(); i++) {
+            MenuItem Items = menuItems.get(i);
+            System.out.println((i + 1) + ". " + Items.getName() + " |W" + Items.getPrice() + "| " + Items.getManual());
+        }
+        System.out.println("0. 뒤로가기 | 뒤로가기");
+    }
+
+    public void subMenu (Menu chooseCategory) {
+
+        // 선택한 하위 메뉴 List
+        List<MenuItem> menuItems = chooseCategory.getMenuItems();
 
         while (true) {
 
-            //입력된 카테고리의 항목들 출력
-            System.out.println("[ " + choosemenu.getCategory() + " MENU ]");
-            for (int i = 0; i < menuItems.size(); i++) {
-                MenuItem Items = menuItems.get(i);
-                System.out.println((i + 1) + ". " + Items.getName() + " |W" + Items.getPrice() + "| " + Items.getManual());
+            //선택한 카테고리의 하위 메뉴 항목들 출력
+            displaySubMenu(menuItems, chooseCategory);
+
+            //입력에 따른 예외처리 부분 (Sub Menu)
+            int choose = inputException(menuItems.size());
+
+            if (choose == 0) {
+                return;
             }
-            System.out.println("0. 뒤로가기 | 뒤로가기");
+            if (0 < choose && choose <= menuItems.size()) {
+                MenuItem item = menuItems.get(choose -1);
+                System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
+            }
+        }
+    }
 
-            //입력에 따른 예외처리 부분
+    public int inputException (int size) {
+        while (true) {
             try {
-                choose = sc.nextInt();
+                int choose = sc.nextInt();
 
-                if (choose == 0) {
-                    break;
-                } else if (choose > menuItems.size()) {
-                    System.out.println("해당 메뉴는 존재하지 않습니다. 다시 선택해주세요.\n");
+                if (choose > size) {
+                    System.out.println("입력한 수는 항목에 해당하지 않습니다. 다시 선택해주세요.\n");
+                    return -1;
+
                 } else {
-                    MenuItem Item = menuItems.get(choose -1);
-                    System.out.println("선택한 메뉴: " + Item.getName() + ", " + Item.getPrice() + ", " + Item.getManual());
+                    return choose;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("메뉴가 올바르지 않습니다. 다시 입력해주세요!\n");
+                System.out.println("메뉴가 올바르지 않습니다. 숫자를 입력해주세요!\n");
                 sc.next();
             }
         }
