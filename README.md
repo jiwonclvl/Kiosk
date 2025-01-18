@@ -11,6 +11,7 @@
 - [주요 기능 [Features]](#주요-기능-features)
 - [프로젝트 실행 순서 [Execution Steps]](#프로젝트-실행-순서-execution-steps)
 - [입력 예외 처리 [Exception Handling]](#입력-예외-처리-exception)
+- [파일 구조 [Structure]](#파일-구조-Structure)
 - [Notes](#notes)
 
 <br>
@@ -167,6 +168,29 @@
 
    ![image](https://github.com/user-attachments/assets/9be2e669-9209-4368-8134-532f2f3b803b)
 
+
+<br>
+
+## 파일 구조 [Structure]
+
+```
+level6/
+├──  main
+│   └── Main.java             # App 시작
+├── menu/
+│   ├── Menu.java             # 메뉴의 카테고리를 관리
+│   └── MenuItem.java         # 메인 메뉴의 하위 항목 관리
+├── cart/
+│   └── Cart.java             # 장바구니 관리
+├── kiosk/
+│   ├── Kiosk.java            # 키오스크 시스템의 진입점
+│   ├── KioskView.java        # 화면의 출력 및 UI 관리
+│   └── KioskController.java  # 사용자 입력 처리 및 기능 로직 관리
+├── user/
+│   └── UserType.java         # 사용자 유형 관리
+└── exception/
+    └── CustomException.java  # 사용자 입력에 대한 예외 처리 
+```
 
 <br>
 
