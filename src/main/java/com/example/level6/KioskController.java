@@ -12,6 +12,9 @@ public class KioskController {
     //예외처리 클래스
     private final InputException exception = new InputException();
 
+    //할인 적용된 최종 금액
+    private double discountPrice;
+
     //KioskView 클래스
     KioskView view = new KioskView();
 
@@ -75,7 +78,7 @@ public class KioskController {
             //최종 주문 선택 출력
             view.displayFinal();
 
-            //주문한 메뉴와 총 금액 출력
+            //주문 선택
             chooseOrder();
         }
         if(choose == 5) {
@@ -87,11 +90,12 @@ public class KioskController {
     public void SubMenu (Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
 
-        //서브 메뉴 출력
-        view.displaySubMenu(choosemenu);
+            //서브 메뉴 출력
+            view.displaySubMenu(choosemenu);
 
-        //서브 메뉴 입력에 따른 예외처리
-        chooseSubMenu(menuItems);
+            //서브 메뉴 입력에 따른 예외처리
+            chooseSubMenu(menuItems);
+
     }
 
     public void chooseSubMenu(List<MenuItem> menuItems) {
@@ -122,11 +126,29 @@ public class KioskController {
     public void chooseOrder() {
         int choose = exception.inputException(2);
 
-        //주문을 누를시 장바구니를 비우고 초기 화면으로 돌아간다.
-        if (choose == 1) {
-            //주문 완료
-            view.displayOrderComplet(cart.getTotalPrice());
-            cart.clearCart();
+        if(choose == 1) {
+            view.displayUserType();
+            //할인률 적용하기
+            selectUserType();
         }
+    }
+
+    public void selectUserType() {
+
+        int input = exception.inputException(4);
+        double discount = 0.0;
+
+        if (input == 1) {
+            discount = (double) UserType.Veteran.getDiscountRate() / 100;
+        } else if (input == 2) {
+            discount = (double) UserType.Soldier.getDiscountRate() / 100;
+        } else if (input == 3) {
+            discount = (double) UserType.Student.getDiscountRate() / 100;
+        }
+
+        this.discountPrice = cart.getTotalPrice() * (1 - discount);
+
+        view.displayOrderComplet(this.discountPrice);
+        cart.clearCart();
     }
 }
