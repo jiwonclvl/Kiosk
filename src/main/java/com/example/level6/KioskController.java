@@ -15,6 +15,8 @@ public class KioskController {
     //KioskView 클래스
     KioskView view = new KioskView();
 
+    //종료 플래그
+    private boolean isExit = false;
     //생성자
     public KioskController(List<Menu> menuList) {
         this.menuList = menuList;
@@ -28,19 +30,20 @@ public class KioskController {
         return false;
     }
 
-    //프로그램 종료
-    public boolean programExit () {
-        return true;
+    //종료 플래그 반환
+    public boolean getIsExit() {
+        return isExit;
     }
 
-    //장바구니의 비어있음 여부에 따른 메뉴 출력
+    //장바구니의 비어있음 여부에 따른 메뉴 출력 (분리)
     public void displayMenu() {
 
         view.displayMainMenu(menuList);
 
         // 카트가 비어있다면 메인 메뉴 3가지와 종료 입력 가능
         if (isCartEmpty()) {
-            // 메뉴 출력 메서드 호출
+
+            // 출력 메섣 추가
             chooseMainMenu(menuList.size());
         } else {
             //비어있지 않다면 메인메뉴와 order menu까지 총 5가지와 종료 입력 가능
@@ -57,8 +60,7 @@ public class KioskController {
 
         if (choose == 0) {
             System.out.println("프로그램을 종료합니다.");
-            programExit();
-            return;
+            isExit = true;
         }
         if (0 < choose && choose <= size) {
             //장바구니 확인 및 주문
@@ -75,7 +77,6 @@ public class KioskController {
                 //주문한 메뉴와 총 금액 출력
                 chooseOrder();
             }
-            //장바구니 전체 취소
             if (choose == 5) {
                 //주문 취소하기
                 cart.clearCart();
@@ -103,7 +104,6 @@ public class KioskController {
 
         if (choose == 0) {
             displayMenu();
-            return;
         }
         if (0 < choose && choose <= menuItems.size()) {
             MenuItem item = menuItems.get(choose - 1);

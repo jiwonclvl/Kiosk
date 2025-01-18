@@ -22,7 +22,7 @@ public class Kiosk {
             kioskController.displayMenu();
 
             //프로그램 종료
-            if(kioskController.programExit()) {return;}
+            if(kioskController.getIsExit()) {return;}
 
         }
     }

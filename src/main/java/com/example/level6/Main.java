@@ -5,9 +5,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        List<MenuItem> burger = new ArrayList<>();
-        List<MenuItem> drink = new ArrayList<>();
-        List<MenuItem> dessert = new ArrayList<>();
+        List<MenuItem> burger;
+        List<MenuItem> drink;
+        List<MenuItem> dessert;
         List<Menu> menuList = new ArrayList<>();
 
         //버거, 음료, 디저트
