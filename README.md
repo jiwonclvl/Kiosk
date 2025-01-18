@@ -11,7 +11,7 @@
 - [주요 기능 [Features]](#주요-기능-features)
 - [프로젝트 실행 순서 [Execution Steps]](#프로젝트-실행-순서-execution-steps)
 - [입력 예외 처리 [Exception Handling]](#입력-예외-처리-exception)
-- [파일 구조 [Structure]](#파일-구조-Structure)
+- [파일 구조 [Architecture]](#파일-구조-Architecture)
 - [Notes](#notes)
 
 <br>
@@ -171,7 +171,7 @@
 
 <br>
 
-## 파일 구조 [Structure]
+## 파일 구조 [Architecture]
 
 ```
 level6/
