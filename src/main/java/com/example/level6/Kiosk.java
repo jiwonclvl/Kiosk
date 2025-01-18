@@ -162,7 +162,6 @@ public class Kiosk {
         }
 
         displayTotalPrice();
-
     }
 
     //총 가격
