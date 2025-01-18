@@ -26,6 +26,7 @@ public class Kiosk {
 
             //프로그램 종료
             if(input == 0) {return;}
+
         }
     }
 }

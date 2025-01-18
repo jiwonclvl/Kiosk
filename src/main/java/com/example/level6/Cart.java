@@ -26,11 +26,6 @@ public class Cart {
          return this.price;
     }
 
-    //금액 초기화
-    public void setPrice() {
-        this.price= 0;
-    }
-
     //장바구니 배열 반환
     public List<MenuItem > getshoppingCart() {
         return this.shoppingCart;
