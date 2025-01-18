@@ -52,7 +52,6 @@ public class KioskController {
         }
     }
 
-
     public void chooseMainMenu(int size) {
 
         //문자 입력시 예외처리
@@ -61,6 +60,7 @@ public class KioskController {
         if (choose == 0) {
             System.out.println("프로그램을 종료합니다.");
             isExit = true;
+            return;
         }
         if (0 < choose && choose <= size) {
             //장바구니 확인 및 주문
@@ -76,8 +76,7 @@ public class KioskController {
 
                 //주문한 메뉴와 총 금액 출력
                 chooseOrder();
-            }
-            if (choose == 5) {
+            } else if (choose == 5) {
                 //주문 취소하기
                 cart.clearCart();
             } else {
@@ -89,7 +88,7 @@ public class KioskController {
         }
     }
 
-    public void SubMenu (Menu choosemenu){
+    public void SubMenu (Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
 
         //서브 메뉴 출력
@@ -126,7 +125,6 @@ public class KioskController {
             System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
             displayMenu();
         }
-        displayMenu();
     }
 
     public void chooseOrder() {
@@ -139,6 +137,5 @@ public class KioskController {
             cart.clearCart();
             displayMenu();
         }
-        displayMenu();
     }
 }
