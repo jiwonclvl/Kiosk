@@ -3,15 +3,18 @@
 - 콘솔에서 **메인 메뉴**를 선택하면 해당 메인 메뉴의 **하위 메뉴들**를 선택할 수 있고 선택한 항목을 장바구니에 담아 주문할 수 있는 키오스크 프로그램을 제작했다. 
 - **level6**을 기준으로 Readme를 작성하였다.
 
+<br>
+
 ## 목차 [Table of Contents]
 
-- [메뉴 소개 [Kiosk Menu]](#메뉴-소개-kiosk-menu-)
-- [주요 기능 [Features]](#주요-기능-features-)
+- [메뉴 소개 [Kiosk Menu]](#메뉴-소개-kiosk-menu)
+- [주요 기능 [Features]](#주요-기능-features)
 - [프로젝트 실행 순서 [Execution Steps]](#프로젝트-실행-순서-execution-steps)
 - [입력 예외 처리 [Exception Handling]](#입력-예외-처리-exception)
 - [Notes](#notes)
 
 
+<br>
 
 ## 메뉴 소개 [Kiosk Menu] 
 
@@ -19,7 +22,8 @@
 
 **Burger, Drink, Dessert** 3가지의 메뉴가 존재한다.
 
-![img_6.png](img_6.png)
+![image](https://github.com/user-attachments/assets/ecb239d1-faed-4510-beaf-e31826ef8c92)
+
 
 ### --- Sub Menu ---
 
@@ -47,7 +51,7 @@
 </details>
 
 
-
+<br>
 
 ## 주요 기능 [Features] 
 - **메인 메뉴**와 **하위 메뉴**를 선택할 수 있다. 
