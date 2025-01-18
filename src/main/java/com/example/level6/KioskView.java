@@ -1,6 +1,7 @@
 package com.example.level6;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class KioskView {
 
@@ -9,23 +10,23 @@ public class KioskView {
         //3가지 카테고리 출력
         System.out.println("[ Main MENU ]");
 
-        for (int i = 0; i < menuList.size(); i++) {
-            Menu category = menuList.get(i);
-            System.out.println((i + 1) + ". " + category.getCategory());
-        }
+        IntStream.range(0, menuList.size())
+                .forEach(i -> System.out.println((i + 1) + ". " + menuList.get(i).getCategory()));
 
         System.out.println("0. 종료 | 종료");
     }
 
     public void displaySubMenu(Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
+        //입력된 카테고리의 항목들 출력
         System.out.println("[ " + choosemenu.getCategory() + " MENU ]");
 
-        //입력된 카테고리의 항목들 출력
-        for (int i = 0; i < menuItems.size(); i++) {
-            MenuItem Items = menuItems.get(i);
-            System.out.println((i + 1) + ". " + Items.getName() + " |W" + Items.getPrice() + "| " + Items.getManual());
-        }
+        IntStream.range(0, menuItems.size())
+                .forEach(i -> {
+                    MenuItem items = menuItems.get(i);
+                    System.out.println((i + 1) + ". " + items.getName() + " |W" + items.getPrice() + "| " + items.getManual());
+                });
+
         System.out.println("0. 뒤로가기 | 뒤로가기");
     }
 
@@ -39,16 +40,17 @@ public class KioskView {
     //장바구니 확인하기
     public void displayCartList(List<MenuItem> shoppingCart) {
         System.out.println("\n[ Orders ]");
-        for (int i = 0; i < shoppingCart.size(); i++) {
-            MenuItem cartItem = shoppingCart.get(i);
-            System.out.println(cartItem.getName() + " | W" + cartItem.getPrice() + " | " + cartItem.getManual());
-        }
+        IntStream.range(0, shoppingCart.size())
+                .forEach(i -> {
+                    MenuItem cartItem = shoppingCart.get(i);
+                    System.out.println(cartItem.getName() + " | W" + cartItem.getPrice() + " | " + cartItem.getManual());
+                });
     }
 
     public void displayTotalPrice(double totalPrice) {
         System.out.println("\n[ Total ]");
         //총 금액 가져오기
-        System.out.println(totalPrice);
+        System.out.println(totalPrice + "\n");
     }
 
     public void displayAddToCart(MenuItem item) {
@@ -59,6 +61,15 @@ public class KioskView {
 
     public void displayFinal() {
         System.out.println("1. 주문       2. 메뉴판");
+    }
+
+    public void displayUserType() {
+        System.out.println("할인 정보를 입력해주세요");
+        int i =1;
+        for (UserType type : UserType.values() ) {
+            System.out.println(i + ". " + type.getType() + " : " + type.getDiscountRate() + "%");
+            i ++;
+        }
     }
 
     public void displayOrderComplet(double totalPrice) {
