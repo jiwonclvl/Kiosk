@@ -16,12 +16,16 @@ public class Kiosk {
         while (true) {
 
             //메뉴 출력 및 선택
-            kioskController.displayMenu();
+            int size = kioskController.displayMenu();
 
-            //장바구니
+            //사용자 입력
+            int input = kioskController.chooseMainMenu(size);
+
+            //입력에 따른 예외 처리
+            kioskController.handleInput(input);
 
             //프로그램 종료
-            if(kioskController.getIsExit()) {return;}
+            if(input == 0) {return;}
         }
     }
 }

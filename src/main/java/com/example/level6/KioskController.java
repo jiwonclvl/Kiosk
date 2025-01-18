@@ -15,8 +15,6 @@ public class KioskController {
     //KioskView 클래스
     KioskView view = new KioskView();
 
-    //종료 플래그
-    private boolean isExit = false;
     //생성자
     public KioskController(List<Menu> menuList) {
         this.menuList = menuList;
@@ -30,61 +28,59 @@ public class KioskController {
         return false;
     }
 
-    //종료 플래그 반환
-    public boolean getIsExit() {
-        return isExit;
-    }
+    //장바구니의 비어있음 여부에 따른 메뉴 출력
+    public int displayMenu() {
 
-    //장바구니의 비어있음 여부에 따른 메뉴 출력 (분리)
-    public void displayMenu() {
-
+        //메인 메뉴 출력
         view.displayMainMenu(menuList);
 
-        // 카트가 비어있다면 메인 메뉴 3가지와 종료 입력 가능
+        // 카트가 비어있는경우
         if (isCartEmpty()) {
-
-            // 출력 메섣 추가
-            chooseMainMenu(menuList.size());
+            return menuList.size();
         } else {
-            //비어있지 않다면 메인메뉴와 order menu까지 총 5가지와 종료 입력 가능
+            //비어있지 않은 경우
             view.displayOrder();
-            chooseMainMenu(menuList.size() + 2);
+            return menuList.size() + 2;
         }
     }
 
-    public void chooseMainMenu(int size) {
-
+    //사용자 입력
+    public int chooseMainMenu(int size) {
         //문자 입력시 예외처리
         int choose = exception.inputException(size);
+        return choose;
+    }
 
-        if (choose == 0) {
+    //입력에 따른 예외 처리
+    public void handleInput(int choose) {
+        //0입력시 종료
+        if(choose == 0) {
             System.out.println("프로그램을 종료합니다.");
-            isExit = true;
             return;
         }
-        if (0 < choose && choose <= size) {
-            //장바구니 확인 및 주문
-            if (choose == 4) {
-                //장바구니 확인하기
-                view.displayCartList(cart.getshoppingCart());
+        //1 ~ 3입력시 메인 메뉴
+        if(0 < choose && choose <= menuList.size()) {
+            Menu chooseMenu = menuList.get(choose - 1);
+            System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategory() + "\n");
 
-                //총 금액 확인하기
-                view.displayTotalPrice(cart.getTotalPrice());
+            SubMenu(chooseMenu);
+        }
+        if(choose == 4) {
+            //장바구니 확인하기 출력
+            view.displayCartList(cart.getshoppingCart());
 
-                //최종 주문 선택 출력
-                view.displayFinal();
+            //총 금액 확인하기 출력
+            view.displayTotalPrice(cart.getTotalPrice());
 
-                //주문한 메뉴와 총 금액 출력
-                chooseOrder();
-            } else if (choose == 5) {
-                //주문 취소하기
-                cart.clearCart();
-            } else {
-                Menu chooseMenu = menuList.get(choose - 1);
-                System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategory() + "\n");
+            //최종 주문 선택 출력
+            view.displayFinal();
 
-                SubMenu(chooseMenu);
-            }
+            //주문한 메뉴와 총 금액 출력
+            chooseOrder();
+        }
+        if(choose == 5) {
+            //주문 취소하기
+            cart.clearCart();
         }
     }
 
@@ -101,9 +97,6 @@ public class KioskController {
     public void chooseSubMenu(List<MenuItem> menuItems) {
         int choose = exception.inputException(menuItems.size());
 
-        if (choose == 0) {
-            displayMenu();
-        }
         if (0 < choose && choose <= menuItems.size()) {
             MenuItem item = menuItems.get(choose - 1);
             System.out.println("선택한 메뉴: " + item.getName() + ", " + item.getPrice() + ", " + item.getManual() + "\n");
@@ -118,24 +111,22 @@ public class KioskController {
 
         int choose = exception.inputException(2);
 
-        //확인을 누르면 카트에 해당 아이템 추가하기
+        //확인을 누르면 카트에 해당 아이템 추가한다.
         if (choose == 1) {
             cart.addItemToCart(item);
             cart.totalAmount(item.getPrice());
             System.out.println("\n" + item.getName() + "이 장바구니에 추가되었습니다." + "\n");
-            displayMenu();
         }
     }
 
     public void chooseOrder() {
         int choose = exception.inputException(2);
 
-        //확인을 누르면 카트에 해당 아이템 추가하기
+        //주문을 누를시 장바구니를 비우고 초기 화면으로 돌아간다.
         if (choose == 1) {
             //주문 완료
             view.displayOrderComplet(cart.getTotalPrice());
             cart.clearCart();
-            displayMenu();
         }
     }
 }
