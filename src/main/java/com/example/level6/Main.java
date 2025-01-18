@@ -20,7 +20,8 @@ public class Main {
         menuList.add(new Menu("Drinks", drink));
         menuList.add(new Menu("Desserts", dessert));
 
-        Kiosk kiosk = new Kiosk(menuList);
+        KioskController kioskController = new KioskController(menuList);
+        Kiosk kiosk = new Kiosk(kioskController);
         //메뉴 출력 및 사용자 입력 시작
         kiosk.start();
     }
