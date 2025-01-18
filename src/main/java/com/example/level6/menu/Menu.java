@@ -1,4 +1,4 @@
-package com.example.level6;
+package com.example.level6.menu;
 
 import java.util.List;
 

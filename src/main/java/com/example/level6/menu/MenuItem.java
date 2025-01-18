@@ -1,4 +1,4 @@
-package com.example.level6;
+package com.example.level6.menu;
 
 public class MenuItem {
     //메뉴 이름

@@ -1,4 +1,8 @@
-package com.example.level6;
+package com.example.level6.kiosk;
+
+import com.example.level6.menu.Menu;
+import com.example.level6.menu.MenuItem;
+import com.example.level6.user.UserType;
 
 import java.util.List;
 import java.util.stream.IntStream;

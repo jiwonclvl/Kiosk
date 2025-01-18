@@ -1,4 +1,6 @@
-package com.example.level6;
+package com.example.level6.cart;
+
+import com.example.level6.menu.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;

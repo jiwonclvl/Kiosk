@@ -1,4 +1,9 @@
 package com.example.level6;
+import com.example.level6.kiosk.Kiosk;
+import com.example.level6.kiosk.KioskController;
+import com.example.level6.menu.Menu;
+import com.example.level6.menu.MenuItem;
+
 import java.util.ArrayList;
 import java.util.List;
 

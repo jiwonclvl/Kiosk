@@ -1,4 +1,4 @@
-package com.example.level6;
+package com.example.level6.user;
 
 public enum UserType {
     Veteran("국가유공자",10),

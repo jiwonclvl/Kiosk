@@ -1,4 +1,4 @@
-package com.example.level6;
+package com.example.level6.exception;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
