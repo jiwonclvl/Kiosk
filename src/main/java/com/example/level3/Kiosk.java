@@ -41,7 +41,7 @@ public class Kiosk {
         }
     }
 
-    private void displayMainMenu () {
+    public void displayMainMenu () {
 
         System.out.println("[ SHAKESHACK MENU ]");
 
