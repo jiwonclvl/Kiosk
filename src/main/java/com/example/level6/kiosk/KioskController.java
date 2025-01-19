@@ -18,9 +18,6 @@ public class KioskController {
     //예외처리 클래스
     private final InputException exception = new InputException();
 
-    //할인 적용된 최종 금액
-    private double discountPrice;
-
     //KioskView 클래스
     KioskView view = new KioskView();
 
@@ -54,40 +51,44 @@ public class KioskController {
     }
 
     //사용자 입력
-    public int chooseMainMenu(int size) {
+    public int userInput(int size) {
         //문자 입력시 예외처리
-        int choose = exception.inputException(size);
-        return choose;
+        int input = exception.inputException(size);
+        return input;
     }
 
     //입력에 따른 예외 처리
-    public void handleInput(int choose) {
+    public void handleInput(int input) {
         //0입력시 종료
-        if(choose == 0) {
+        if(input == 0) {
             System.out.println("프로그램을 종료합니다.");
             return;
         }
         //1 ~ 3입력시 메인 메뉴
-        if(0 < choose && choose <= menuList.size()) {
-            Menu chooseMenu = menuList.get(choose - 1);
+        if(0 < input && input <= menuList.size()) {
+            Menu chooseMenu = menuList.get(input - 1);
             System.out.println("선택한 메인 메뉴: " + chooseMenu.getCategory() + "\n");
 
+            //선택한 메인메뉴의 하위 항목들 출력
             SubMenu(chooseMenu);
         }
-        if(choose == 4) {
-            //장바구니 확인하기 출력
+        if(input == 4) {
+            //장바구니에 담긴 메뉴 출력
             view.displayCartList(cart.getshoppingCart());
 
-            //총 금액 확인하기 출력
+            //총 금액 출력
             view.displayTotalPrice(cart.getTotalPrice());
 
-            //최종 주문 선택 출력
+            //사용자의 주문 여부 출력
             view.displayFinal();
 
-            //주문 선택
-            chooseOrder();
+            //사용자가 주문할지 말지 선택
+            int select = chooseOrder();
+
+            //사용자 선택에 따라 할인률 적용하기
+            selectUserType(select);
         }
-        if(choose == 5) {
+        if(input == 5) {
             //주문 취소하기
             cart.clearCart();
         }
@@ -117,6 +118,7 @@ public class KioskController {
     }
 
     public void chooseAddToCart(MenuItem item) {
+        //담은 아이템 출력
         view.displayAddToCart(item);
 
         int choose = exception.inputException(2);
@@ -129,32 +131,38 @@ public class KioskController {
         }
     }
 
-    public void chooseOrder() {
-        int choose = exception.inputException(2);
+    public int chooseOrder() {
+        int input = exception.inputException(2);
 
-        if(choose == 1) {
+        if(input == 1) {
+            //사용자가 주문을 눌렀다면 사용자 유형 출력
             view.displayUserType();
-            //할인률 적용하기
-            selectUserType();
         }
+        return input;
     }
 
-    public void selectUserType() {
+    public void selectUserType(int select) {
 
-        int input = exception.inputException(4);
+        double discountPrice = 0.0;
         double discount = 0.0;
 
-        if (input == 1) {
-            discount = (double) UserType.Veteran.getDiscountRate() / 100;
-        } else if (input == 2) {
-            discount = (double) UserType.Soldier.getDiscountRate() / 100;
-        } else if (input == 3) {
-            discount = (double) UserType.Student.getDiscountRate() / 100;
+        if(select == 1) {
+            int input = exception.inputException(4);
+
+            if (input == 1) {
+                discount = (double) UserType.Veteran.getDiscountRate() / 100;
+            } else if (input == 2) {
+                discount = (double) UserType.Soldier.getDiscountRate() / 100;
+            } else if (input == 3) {
+                discount = (double) UserType.Student.getDiscountRate() / 100;
+            }
+
+            //할인률이 적용된 최종 가격
+            discountPrice = cart.getTotalPrice() * (1 - discount);
         }
 
-        this.discountPrice = cart.getTotalPrice() * (1 - discount);
-
-        view.displayOrderComplet(this.discountPrice);
+        //주문 완료 문자 출력 후 카트 비우기
+        view.displayOrderComplet(discountPrice);
         cart.clearCart();
     }
 }

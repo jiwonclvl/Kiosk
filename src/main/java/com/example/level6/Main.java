@@ -10,20 +10,12 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        List<MenuItem> burger;
-        List<MenuItem> drink;
-        List<MenuItem> dessert;
         List<Menu> menuList = new ArrayList<>();
 
-        //버거, 음료, 디저트
-        burger = addBurger();
-        drink = addDrink();
-        dessert = addDessert();
-
         //카테고리별 이름과 해당 메뉴 항목들을 배열에 저장
-        menuList.add(new Menu("Burgers", burger));
-        menuList.add(new Menu("Drinks", drink));
-        menuList.add(new Menu("Desserts", dessert));
+        menuList.add(new Menu("Burgers", createBurgerMenu()));
+        menuList.add(new Menu("Drinks", createDrinkMenu()));
+        menuList.add(new Menu("Desserts", createDessertMenu()));
 
         KioskController kioskController = new KioskController(menuList);
         Kiosk kiosk = new Kiosk(kioskController);
@@ -31,7 +23,7 @@ public class Main {
         kiosk.start();
     }
 
-    public static List<MenuItem> addBurger() {
+    public static List<MenuItem> createBurgerMenu() {
         List<MenuItem> burgers = new ArrayList<>();
 
         //카테고리 내 메뉴 항목들 (버거)
@@ -43,7 +35,7 @@ public class Main {
         return burgers;
     }
 
-    public static List<MenuItem> addDrink() {
+    public static List<MenuItem> createDrinkMenu() {
         List<MenuItem> drinks = new ArrayList<>();
 
         // 카테고리 내 메뉴 항목들 (음료)
@@ -55,7 +47,7 @@ public class Main {
         return drinks;
     }
 
-    public static List<MenuItem> addDessert() {
+    public static List<MenuItem> createDessertMenu() {
         List<MenuItem> desserts = new ArrayList<>();
 
         // 카테고리 내 메뉴 항목들 (디저트)
