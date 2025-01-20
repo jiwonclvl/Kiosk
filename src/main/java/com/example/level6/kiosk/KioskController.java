@@ -27,7 +27,7 @@ public class KioskController {
     }
 
     //장바구니가 비어있는지 확인
-    public boolean isCartEmpty() {
+    private boolean isCartEmpty() {
         if (cart.getshoppingCart().isEmpty()) {
             return true;
         }
@@ -83,10 +83,11 @@ public class KioskController {
             view.displayFinal();
 
             //사용자가 주문할지 말지 선택
-            int select = chooseOrder();
+            int select = userInput(2);
 
             //사용자 선택에 따라 할인률 적용하기
-            selectUserType(select);
+            chooseOrder(select);
+
         }
         if(input == 5) {
             //주문 취소하기
@@ -94,7 +95,7 @@ public class KioskController {
         }
     }
 
-    public void SubMenu (Menu choosemenu) {
+    private void SubMenu (Menu choosemenu) {
         List<MenuItem> menuItems = choosemenu.getMenuItems();
 
             //서브 메뉴 출력
@@ -105,7 +106,7 @@ public class KioskController {
 
     }
 
-    public void chooseSubMenu(List<MenuItem> menuItems) {
+    private void chooseSubMenu(List<MenuItem> menuItems) {
         int choose = exception.inputException(menuItems.size());
 
         if (0 < choose && choose <= menuItems.size()) {
@@ -117,7 +118,7 @@ public class KioskController {
         }
     }
 
-    public void chooseAddToCart(MenuItem item) {
+    private void chooseAddToCart(MenuItem item) {
         //담은 아이템 출력
         view.displayAddToCart(item);
 
@@ -131,17 +132,15 @@ public class KioskController {
         }
     }
 
-    public int chooseOrder() {
-        int input = exception.inputException(2);
-
-        if(input == 1) {
+    private void chooseOrder(int select) {
+        if(select == 1) {
             //사용자가 주문을 눌렀다면 사용자 유형 출력
             view.displayUserType();
+            selectUserType(select);
         }
-        return input;
     }
 
-    public void selectUserType(int select) {
+    private void selectUserType(int select) {
 
         double discountPrice = 0.0;
         double discount = 0.0;
