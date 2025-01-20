@@ -35,7 +35,7 @@ public class KioskController {
     }
 
     //장바구니의 비어있음 여부에 따른 메뉴 출력
-    public int displayMenu() {
+    public int MainMenu() {
 
         //메인 메뉴 출력
         view.displayMainMenu(menuList);

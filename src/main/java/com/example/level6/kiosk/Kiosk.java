@@ -15,7 +15,7 @@ public class Kiosk {
         while (true) {
 
             //장바구니의 비어있음 여부에 따른 메뉴 사이즈
-            int size = kioskController.displayMenu();
+            int size = kioskController.MainMenu();
 
             //사용자 입력
             int input = kioskController.userInput(size);
